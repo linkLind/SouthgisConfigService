@@ -16,18 +16,18 @@ Get Southgis ImapMobile Service configuration model.
 
 #Usage
 
-  #import "ConfigModel.h"
+   #import "ConfigModel.h"
   
-  //this is singleton
+   //this is singleton
   
-  ConfigModel *model =[ConfigModel defaultConfigModel];
+   ConfigModel *model =[ConfigModel defaultConfigModel];
   
-  //get the southgis imap configuration service model.
+   //get the southgis imap configuration service model.
   
-  -(void)getAppConfig:(NSString * _Nonnull)appId andURL:( NSString * _Nonnull )url success:(void (^)(ConfigModel *object))success
+   -(void)getAppConfig:(NSString * _Nonnull)appId andURL:( NSString * _Nonnull )url success:(void (^)(ConfigModel *object))success
   
 #Install 
-
-  pod 'SouthgisConfigService'
+ 
+ pod 'SouthgisConfigService'
 
 
