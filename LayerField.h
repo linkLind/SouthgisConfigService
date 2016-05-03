@@ -6,7 +6,7 @@
 //  Copyright © 2016年 zlycare. All rights reserved.
 //
 
-#import "BaseEntity.h"
+#import <Foundation/Foundation.h>
 
 @interface LayerField : NSObject
 
