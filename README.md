@@ -26,6 +26,7 @@ Get Southgis ImapMobile Service configuration model.
   
 #Install 
 
+
   pod 'SouthgisConfigService'
 
 
