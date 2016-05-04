@@ -10,4 +10,10 @@
 
 @implementation LayoutService
 
++ (nullable NSDictionary *)modelContainerPropertyGenericClass {
+    // value should be Class or Class name.
+    return @{@"fields" : [LayerField class]
+             };
+}
+
 @end

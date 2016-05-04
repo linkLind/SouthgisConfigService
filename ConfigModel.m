@@ -12,6 +12,8 @@
 
 @implementation ConfigModel
 
+
+
 + (nonnull instancetype )defaultConfigModel{
 
     static ConfigModel *instance = nil;
@@ -24,6 +26,13 @@
     return instance;
 }
 
+
++ (nullable NSDictionary *)modelContainerPropertyGenericClass {
+    // value should be Class or Class name.
+    return @{@"layerservice" : [LayoutService class],
+             @"layerservice_analysis" : [LayoutService class],
+             };
+}
 
 /**
  *  @author crash         crash_wu@163.com   , 16-05-03 17:05:51

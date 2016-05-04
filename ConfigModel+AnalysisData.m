@@ -17,7 +17,8 @@
     
     NSDictionary *configFile = [datas objectForKey:@"configFile"];
     NSDictionary *configuration = [configFile objectForKey:@"configuration"];
-    ConfigModel *cModel = [ConfigModel yy_modelWithJSON:configuration];
+    
+    ConfigModel *cModel = [ConfigModel yy_modelWithDictionary:configuration];
     
     self.layerservice = cModel.layerservice;
     self.layerservice_analysis = cModel.layerservice_analysis;

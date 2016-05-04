@@ -42,6 +42,7 @@
 + (nonnull instancetype )defaultConfigModel;
 
 
+//+ (nullable NSDictionary *)modelContainerPropertyGenericClass;
 
 /**
  *  @author crash         crash_wu@163.com   , 16-05-03 17:05:51
