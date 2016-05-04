@@ -58,7 +58,7 @@
         //解析数据
         [self analysisData:json];
         //保存数据
-        [self saveDataToArchiver:json];
+     //   [self saveDataToArchiver:json];
         
         success(weak);
         [SVProgressHUD dismiss];

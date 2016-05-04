@@ -23,7 +23,9 @@
     self.layerservice_analysis = cModel.layerservice_analysis;
     self.map = cModel.map;
     self.area = cModel.area;
-    
+    cModel.configVersion =self.configVersion;
+    NSDictionary *dictionary= [NSDictionary yy_modelDictionaryWithClass:[ConfigModel class] json:cModel];
+    [self saveDataToArchiver:dictionary];
 }
 
 - (void)saveDataToArchiver:(NSDictionary *)datas{
