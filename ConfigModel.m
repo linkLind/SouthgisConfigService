@@ -12,7 +12,7 @@
 
 @implementation ConfigModel
 
-+ (instancetype)defaultConfigModel{
++ (nonnull instancetype )defaultConfigModel{
 
     static ConfigModel *instance = nil;
     static dispatch_once_t predicate;
@@ -37,7 +37,7 @@
  *  @param url     配置信息URL地址
  *  @param success 获取成功返回
  */
--(void)getAppConfig:(NSString * _Nonnull)appId andURL:( NSString * _Nonnull )url success:(void (^)(ConfigModel *_Nullable object))success{
+-(void)getAppConfig:(NSString * _Nonnull)appId andURL:( NSString * _Nonnull )url success:(void (^ _Nonnull)(ConfigModel *_Nullable object))success{
     
     NSString *urlHttp=[NSString stringWithFormat:@"%@?appId=%@",url,appId];
     [SVProgressHUD showWithStatus:@"正在加载配置信息..."];

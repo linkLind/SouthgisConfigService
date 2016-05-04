@@ -20,15 +20,15 @@
 /**=========移动配置后台返回参数解析后的变量==========**/
 
 /**配置文件版本**/
-@property(nonatomic,strong)NSString *configVersion;
+@property(nonatomic,strong,nullable)NSString * configVersion;
 
-@property(nonatomic,strong)NSArray<LayoutService *> *layerservice;
+@property(nonatomic,strong,nullable)NSArray<LayoutService *> *layerservice;
 
-@property(nonatomic,strong)NSArray<LayoutService *> *layerservice_analysis;
+@property(nonatomic,strong,nullable)NSArray<LayoutService *> *layerservice_analysis;
 
-@property(nonatomic,strong)MapInfo *map;
+@property(nonatomic,strong,nullable)MapInfo *map;
 
-@property(nonatomic,strong)Area *area;
+@property(nonatomic,strong,nullable)Area *area;
 
 /**==============END============================**/
 
@@ -39,7 +39,7 @@
  *
  * @return 返回一个实体对象
  */
-+ (instancetype)defaultConfigModel;
++ (nonnull instancetype )defaultConfigModel;
 
 
 
@@ -52,6 +52,6 @@
  *  @param url     配置信息URL地址
  *  @param success 获取成功返回
  */
--(void)getAppConfig:(NSString * _Nonnull)appId andURL:( NSString * _Nonnull )url success:(void (^ _Nullable)(ConfigModel *_Nullable object ))success;
+-(void)getAppConfig:(NSString * _Nonnull)appId andURL:( NSString * _Nonnull )url success:(void (^ _Nonnull)(ConfigModel *_Nullable object ))success;
 
 @end
