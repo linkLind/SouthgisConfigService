@@ -18,9 +18,6 @@
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         instance = [[self alloc] init];
-        ConfigModel *configFile =[instance loadDataFromArchiver];
-        if (configFile)
-            [instance analysisData:configFile];
    
     });
     
@@ -40,32 +37,40 @@
 -(void)getAppConfig:(NSString * _Nonnull)appId andURL:( NSString * _Nonnull )url success:(void (^ _Nonnull)(ConfigModel *_Nullable object))success{
     
     NSString *urlHttp=[NSString stringWithFormat:@"%@?appId=%@",url,appId];
-    [SVProgressHUD showWithStatus:@"正在加载配置信息..."];
     
-    __weak typeof(self) weak =self;
-    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:urlHttp] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        if (error ||data.length==0 ||!data) {
-            [SVProgressHUD showErrorWithStatus:@"配置信息加载失败!"];
-            return ;
-        }
-        
-        id json = data;
-        if ([json isKindOfClass:[NSData class]]) {
-            json = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
-        }
-        
-        //解析数据
-        [self analysisData:json];
-        //保存数据
-     //   [self saveDataToArchiver:json];
-        
-        success(weak);
-        [SVProgressHUD dismiss];
-        
-        
-    }]resume];
+    //获取缓存信息
+    ConfigModel *configFile =[self loadDataFromArchiver];
     
+    //判断本地是否有缓存数据存在
+    if (!configFile) {
+        //缓存不存在
+        [SVProgressHUD showWithStatus:@"正在加载配置信息..."];
+        
+        __weak typeof(self) weak =self;
+        [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:urlHttp] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            
+            if (error ||data.length==0 ||!data) {
+                [SVProgressHUD showErrorWithStatus:@"配置信息加载失败!"];
+                return ;
+            }
+            
+            id json = data;
+            if ([json isKindOfClass:[NSData class]]) {
+                json = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
+            }
+            
+            //解析数据
+            [self analysisData:json];
+            success(weak);
+            [SVProgressHUD dismiss];
+            
+        }]resume];
+        
+    }else{
+        
+        success(configFile);
+    }
+
 }
 
 @end
