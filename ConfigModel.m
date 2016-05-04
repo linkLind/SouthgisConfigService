@@ -66,6 +66,8 @@
             
         }]resume];
         
+        [SVProgressHUD dismiss];
+        
     }else{
         
         success(configFile);

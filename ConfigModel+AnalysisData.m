@@ -24,7 +24,7 @@
     self.map = cModel.map;
     self.area = cModel.area;
     cModel.configVersion =self.configVersion;
-    NSDictionary *dictionary= [NSDictionary yy_modelDictionaryWithClass:[ConfigModel class] json:cModel];
+    NSDictionary *dictionary= [cModel yy_modelToJSONObject];
     [self saveDataToArchiver:dictionary];
 }
 
@@ -32,7 +32,16 @@
     
     NSString *filePath = [self getSavePath];
     
-    [datas writeToFile:filePath atomically:YES];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //创建文件
+    BOOL res=[fileManager createFileAtPath:filePath contents:nil attributes:nil];
+    
+    if (res) {
+        //文件创建成功，则写数据到文件中
+        [datas writeToFile:filePath atomically:YES];
+        
+    }
+
 }
 
 - (ConfigModel *)loadDataFromArchiver{
@@ -57,9 +66,15 @@
  * @return 数据保存地址
  */
 - (NSString *)getSavePath{
-    NSString* tempPath = NSTemporaryDirectory();
-    NSString* tempFile = [tempPath stringByAppendingPathComponent:@"config.plist"];
-    return tempFile;
+//    NSString* tempPath = NSTemporaryDirectory();
+//    NSString* tempFile = [tempPath stringByAppendingPathComponent:@"southgisconfig.plist"];
+    
+    
+    NSArray *cacheArray = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachePath = [cacheArray objectAtIndex:0];
+    cachePath =[cachePath stringByAppendingPathComponent:@"southgisconfig.plist"];
+    
+    return cachePath;
 }
 
 
